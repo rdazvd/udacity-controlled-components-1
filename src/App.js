@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import PropTypes from 'prop-types';
+
 
 class App extends Component {
+  static propTypes = {
+    echo: PropTypes.string.isRequired
+  };
+  state = {
+    echo: ''
+  };
+  onInputChange = (inputValue) =>
+	this.setState({
+      echo: inputValue.trim()
+    });
   render() {
     return (
       <div className="App">
@@ -11,9 +23,14 @@ class App extends Component {
           <h1 className="App-title">ReactND - Coding Practice</h1>
         </header>
         <div className="container">
-          <input type="text" placeholder="Say Something" />
+          <input
+            type="text"
+            placeholder="Say Something"
+            value={this.state.echo}
+            onChange={event => this.onInputChange(event.target.value)}
+          />
           <p className="echo">Echo:</p>
-          <p>This should mirror the text you typed into the input field.</p>
+          <p>{this.state.echo}</p>
         </div>
       </div>
     );
